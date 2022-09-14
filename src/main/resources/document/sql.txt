@@ -1,0 +1,22 @@
+INSERT INTO original 
+	(name, item_condition_id, category_name, brand_name, price, shipping, item_description)
+VALUES
+	
+	
+COPY original
+	(name, condition_id, category_name, brand, price, shipping, description)
+FROM 
+	'/Users/yoshiokawakubo/var/lib/postgresql/data/DataManagementSystem/train.tsv';
+
+--  外部ファイルをインポート --
+COPY original
+	(train_id, name, item_condition_id, category_name, brand_name, price, shipping, item_description)
+FROM 
+	'train.tsv'
+WITH
+	DELIMITER E'\t' csv header;
+
+--  テーブルのカラムの型を変更 --
+alter table original
+alter column price set data type decimal;
+	
