@@ -19,4 +19,19 @@ WITH
 --  テーブルのカラムの型を変更 --
 alter table original
 alter column price set data type decimal;
-	
+
+--  categoriesテーブルの作成 --
+CREATE TABLE categories 
+(
+	id serial primary key
+	, parent_id integer
+	, category_name text
+	, name_all text
+);
+
+DELETE FROM categories WHERE id > 10;
+
+SELECT category_name FROM original WHERE category_name LIKE '%Electronics%';
+
+--  handmadeカテゴリ > smallcategory > parent_id SQL文 --
+UPDATE categories SET parent_Id = 10 WHERE id > 1142;

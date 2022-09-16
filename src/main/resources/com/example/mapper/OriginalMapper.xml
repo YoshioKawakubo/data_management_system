@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+			PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        	
+<mapper namespace="com.example.mapper.OriginalMapper">
+	
+	<!-- 全件選択 -->
+	<select id="findAll" resultMap="originalCategory">
+		SELECT 
+			train_id
+			, name
+			, item_condition_id
+			, category_name
+			, brand_name
+			, price
+			, shipping
+			, item_description
+		FROM original
+	</select>
+	
+	<!-- カテゴリの全件検索 -->
+	<select id="findAllCategory" resultType="string">
+		SELECT
+			category_name
+		FROM 
+			original
+		WHERE
+			category_name is not null
+	</select>
+	
+	<resultMap type="com.example.domain.Original" id="originalCategory">
+	<id column="train_id" property="trainId" />
+	<result column="name" property="name" />
+	<result column="item_condition_id" property="itemConditionId" />
+	<result column="category_name" property="categoryName" />
+	<result column="brand_name" property="brandName" />
+	<result column="price" property="price" />
+	<result column="shipping" property="shipping" />
+	<result column="item_description" property="itemDescription" />
+	</resultMap>
+	
+	<resultMap type="com.example.domain.Original" id="category">
+	<id column="train_id" property="trainId" />
+	<result column="category_name" property="categoryName" />
+	</resultMap>
+	
+</mapper>
