@@ -1,4 +1,4 @@
-package com.example.mapper;
+package com.example.mapper.createTable;
 
 import java.util.List;
 
