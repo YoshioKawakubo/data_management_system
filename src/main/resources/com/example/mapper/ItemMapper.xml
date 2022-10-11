@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+			PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        	
+<mapper namespace="com.example.mapper.ItemMapper">
+
+	<!-- カテゴリ名からcategoriesテーブルのid検索 -->
+	<select id="findCategoryByNameAll" resultType="integer" parameterType="string">
+		SELECT 
+			id 
+		FROM 
+			categories 
+		WHERE 
+			name_all = #{nameAll}
+	</select>
+	
+	<!-- itemの新規登録 -->
+	<insert id="insert" parameterType="map">
+		INSERT INTO items
+			(name, condition, category, brand, price, shipping, description)
+		VALUES 
+			(#{item.name}, #{item.condition}, #{item.category}, #{item.brand}, #{item.price}, #{item.shipping}, #{item.description})
+	</insert>
+</mapper>
