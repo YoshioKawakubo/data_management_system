@@ -58,4 +58,37 @@
 			category_name  = #{name}
 	</select>
 	
+	<!-- 大カテゴリの名前から属する中カテゴリの名前検索 -->
+	<select id="findChildCategoryByParentCategoryName" parameterType="string" resultType="string">
+		<![CDATA[
+			SELECT category_name 
+			FROM categories 
+			WHERE parent_id = (
+			SELECT id 
+			FROM categories 
+			WHERE category_name = #{parentCategory} 
+			AND id <= 10
+			)
+		]]>
+	</select>
+	
+	<!-- 大カテゴリの名前から属する中カテゴリの名前検索 -->
+	<select id="findGrandChildByChildCategoryNameAndParentCategoryName" parameterType="string" resultType="string">
+		<![CDATA[
+				SELECT category_name 
+				FROM categories
+				WHERE parent_id = (
+					SELECT id
+					FROM categories
+					WHERE category_name = #{childCategory}
+					AND parent_id = (
+						SELECT id 
+						FROM categories 
+						WHERE category_name = #{parentCategory} 
+						AND id <= 10
+					)
+				);
+		]]>
+	</select>
+	
 </mapper>

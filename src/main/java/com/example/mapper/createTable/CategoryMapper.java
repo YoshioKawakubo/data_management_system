@@ -1,6 +1,7 @@
 package com.example.mapper.createTable;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -24,7 +25,11 @@ public interface CategoryMapper {
 	//parentIdからcategoryNameをmiddleCategoryのcategoryNameを検索
 	public List<String> returnMiddleCategoryNameByParentId(Integer parentId);
 	
+	//parentCategoryからchildCategory一覧を検索するメソッド
+	public List<String> findChildCategoryByParentCategoryName(String parentCategory);
 	
+	//childCategoryとParentCategoryからgrandChild一覧を検索するメソッド
+	public List<String> findGrandChildByChildCategoryNameAndParentCategoryName(@Param("parentCategory")String parentCategory, @Param("childCategory")String childCategory);
 	
 	//idからcategoryNameを検索するメソッド
 	public String returnId(Integer id);

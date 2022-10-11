@@ -74,3 +74,37 @@ SELECT
 	, o.item_description
 FROM original AS o
 WHERE o.category_name is NULL;
+
+
+--  親カテゴリの名前から子カテゴリの名前を取得する --
+SELECT category_name 
+FROM categories 
+WHERE parent_id = (
+SELECT id 
+FROM categories 
+WHERE category_name = #{parentCategory} 
+AND id <= 10
+)
+
+<!-- 中カテゴリの名前から属する小カテゴリの名前検索 -->
+ 
+SELECT category_name 
+FROM categories
+WHERE parent_id = (
+	SELECT id
+	FROM categories
+	WHERE category_name = #{childCategory}
+	AND parent_id = (
+		SELECT id 
+		FROM categories 
+		WHERE category_name = #{parentCategory} 
+		AND id <= 10
+	)
+);
+
+Sports & Outdoors
+Golf
+
+
+SELECT * from categories WHERE category_name = '
+Sports & Outdoors/Team Sports/Baseball & Softball';
